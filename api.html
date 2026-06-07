@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #cards{
+            display: flex;
+            gap: 80px;
+        }
+
+        .cards{
+
+        }
+    </style>
+</head>
+<body>
+    <!-- 1.檢查API資料有沒有回傳在HTML上 -->
+    <!-- 2.畫面的樣式 -->
+
+     <div id="cards">
+        <!-- 2-1把圖片的再放一層 -->
+        <div class="cards"></div>
+     </div>
+    <!-- https://api.giphy.com/v1/gifs/trending?api_key=hoCdA2G5EPAFDDk85ffcBZARsQr23mKg&limit=25&offset=0&rating=g&bundle=messaging_non_clips -->
+    <script>
+        //2.get Data
+        //3.資料驅動畫面
+        //4.將取得資料串連進來
+        //data[key].image.original.url
+        let getData = [];
+        fetch('APIputHRER')
+            .then((res) =>res.ison())
+            .then((data) => {
+                const cards = document.querySelector("#cards");
+
+                letgetData = data.data;
+                gatData.fetch
+            })
+    </script>
+</body>
+</html>

@@ -1,0 +1,660 @@
+* {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* ✨ 1. 配色調整：夢幻糖果藍色背景 */
+            font-family: 'Comic Neue', cursive, 'Onest', sans-serif;
+            background: #EBF8FF;
+            padding: 20px;
+        }
+
+        .wrapper {
+            max-width: 1400px;
+            margin: auto;
+            /* ✨ 2. 形狀圓潤化：超大圓角，增加夢幻感 */
+            background: #FFFFFF;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(100, 150, 200, 0.1);
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+        .minavbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 3rem;
+        }
+
+        .logo {
+            /* ✨ 3. 文字調整：使用可愛的 Bubblegum Sans 字體 */
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 2.2rem;
+            color: #FF9FCE; /* 可愛粉紅 */
+            text-shadow: 2px 2px 0px rgba(255, 159, 206, 0.2);
+        }
+
+        .grupo-botones {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            border: none;
+            background: transparent;
+            padding: .8rem 1.2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: .3s;
+            font-weight: 700;
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .nav-btn:hover,
+        .nav-btn.active {
+            /* ✨ 4. 形狀調整：使用奶油黃色背景，並將圓角加大 */
+            background: #FFF8E1; 
+            border-radius: 20px;
+        }
+
+        .info-usuario {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .icono-usuario {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #FFF8E1;
+        }
+
+        .idiomas {
+            padding: .6rem 1rem;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: .3s;
+            color: #555;
+        }
+
+        .idiomas:hover {
+            background: #EBF8FF;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+        .main-layout {
+            display: flex;
+        }
+
+        .first-layout {
+            flex: 1.6;
+            min-width: 0;
+        }
+
+        .second-layout {
+            flex: 1;
+            min-height: 700px;
+            margin: 1rem 1rem 1rem 0;
+        }
+
+        /* =========================
+           SEARCH
+        ========================= */
+        .suitable-options {
+            /* ✨ 5. 形狀調整：奶油黃背景，大圓角 */
+            background: #FFF8E1; 
+            margin: 1rem;
+            border-radius: 30px;
+            padding: 1.5rem;
+        }
+
+        .container-fechas {
+            margin-bottom: 2rem;
+        }
+
+        .fecha-filtros {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .botones-filtro {
+            display: flex;
+            gap: .5rem;
+        }
+
+        .botones-filtro button {
+            border: none;
+            background: transparent;
+            padding: .6rem 1.2rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: .3s;
+            font-weight: 700;
+            color: #555;
+        }
+
+        .botones-filtro button:hover,
+        .botones-filtro .active {
+            /* ✨ 6. 形狀調整：使用可愛粉藍色 */
+            background: #D8F3FF;
+            border-radius: 20px;
+        }
+
+        .container-inputs {
+            margin-top: 2rem;
+            display: flex;
+            background: #FFFFFF; /* ✨ 這裡改成白色，讓內層 inputs 顯得更浮空 */
+            border-radius: 30px;
+            overflow: hidden;
+            border: 2px solid #EBF8FF;
+        }
+
+        .input-label {
+            flex: 1;
+            background: white;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .label-input {
+            color: #888;
+            font-size: .85rem;
+            margin-bottom: .5rem;
+            font-weight: 700;
+        }
+
+        .custom-input {
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 1rem;
+            width: 100%;
+            font-family: 'Comic Neue', cursive;
+            color: #555;
+        }
+
+        #search-btn {
+            border: none;
+            /* ✨ 7. 形狀與顏色調整：使用可愛粉藍色，更大圓角 */
+            background: #A0E0FA; 
+            color: #555;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            font-weight: 700;
+            transition: .3s;
+            border-radius: 20px;
+            margin: 10px;
+        }
+
+        #search-btn:hover {
+            background: #88D6F7;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .text-suitiable h3 {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 1.6rem;
+            color: #FFB3D9;
+        }
+
+        .text-suitiable h6 {
+            color: #AAA;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+
+        .arrows-btn {
+            display: flex;
+            gap: .5rem;
+        }
+
+        .arrow {
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 25px; /* 完全圓形 */
+            background: white;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(100, 150, 200, 0.05);
+            transition: .3s;
+            color: #555;
+        }
+
+        .arrow i {
+            font-size: 1rem;
+        }
+
+        .arrow:hover {
+            transform: translateY(-3px);
+            background: #FFF8E1;
+        }
+
+        /* =========================
+           CAROUSEL
+        ========================= */
+        .carousel-wrapper {
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* ✨ 增加一個發光粒子的奇幻裝飾 (純 CSS) */
+        .carousel-wrapper::before,
+        .carousel-wrapper::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.4);
+            z-index: 5;
+            animation: particleFly 3s infinite linear;
+        }
+        .carousel-wrapper::after { top: 10%; left: 30%; animation-delay: 1.5s; }
+        @keyframes particleFly {
+            0% { transform: translateY(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-50px) translateX(20px); opacity: 0; }
+        }
+
+        .grilla-imagenes {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+        }
+
+        .grilla-imagenes::-webkit-scrollbar {
+            display: none;
+        }
+
+        .elemento {
+            position: relative;
+            flex: 0 0 calc((100% - 2rem) / 3);
+            min-width: calc((100% - 2rem) / 3);
+            border-radius: 30px; /* 大圓角 */
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 8px 20px rgba(100, 150, 200, 0.08);
+            transition: .3s;
+            border: 2px solid #FFFFFF;
+        }
+
+        .elemento:hover {
+            transform: translateY(-5px);
+            border: 2px solid #D8F3FF;
+        }
+
+        .grilla-imagenes img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            filter: brightness(.9) contrast(1.1); /* ✨ 12. 內容調整：調整亮度與對比，讓插畫感更強 */
+        }
+
+        .price {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            /* ✨ 形狀與顏色調整：奶油黃色、超圓潤 */
+            background: rgba(255, 248, 225, 0.85); 
+            color: #555;
+            padding: .6rem 1rem;
+            border-radius: 999px;
+            backdrop-filter: blur(5px);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .heart {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            cursor: pointer;
+            border: 2px solid #FFFFFF;
+        }
+
+        .heart i {
+            color: #FFB3D9; /* ✨ 顏色調整：可愛粉紅 */
+            transition: .25s;
+        }
+
+        .heart:hover i {
+            color: #FF80BF;
+        }
+
+        .text-element {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .text1 {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .texto-estrellado {
+            margin-top: .3rem;
+            font-weight: 700;
+        }
+
+        /* =========================
+           ROOM LIST
+        ========================= */
+        .building-container {
+            /* ✨ 13. 形狀調整：粉藍色背景，大圓角 */
+            background: #EBF8FF; 
+            margin: 1rem;
+            border-radius: 30px;
+            padding: 1.5rem;
+        }
+
+        .grilla-filtros {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1rem;
+        }
+
+        .card-filtro {
+            background: white;
+            border-radius: 30px; /* 大圓角 */
+            padding: 1.2rem;
+            display: flex;
+            gap: 1rem;
+            box-shadow: 0 5px 15px rgba(100, 150, 200, 0.06);
+            transition: .3s;
+            position: relative;
+        }
+        
+        /* ✨ 增加一個浮空小 Livly 的裝飾 (純 CSS) */
+        .card-filtro::before {
+            content: '✨';
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            font-size: 1.2rem;
+            opacity: 0;
+            transition: .3s;
+        }
+        .card-filtro:hover {
+            transform: translateY(-3px);
+            border: 2px solid #FFF8E1;
+        }
+        .card-filtro:hover::before { opacity: 1; transform: translateY(-5px); }
+
+        .card-filtro img {
+            width: 110px;
+            height: 110px;
+            border-radius: 20px; /* ✨ 大圓角 */
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 3px solid #FFF8E1; /* ✨ 奶油黃邊框，增加可愛度 */
+        }
+
+        .room-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex: 1;
+        }
+
+        .room-info h3 {
+            font-family: 'Bubblegum Sans', cursive;
+            margin-bottom: .4rem;
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        .room-info p {
+            margin: .2rem 0;
+            color: #888;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .room-info p i {
+            margin-right: 5px;
+            width: 16px;
+            text-align: center;
+        }
+
+        .book-btn {
+            margin-top: .5rem;
+            border: none;
+            /* ✨ 顏色調整：奶油黃色，可愛粉藍文字 */
+            background: #FFF8E1; 
+            color: #555;
+            padding: .6rem 1.2rem;
+            border-radius: 15px;
+            cursor: pointer;
+            align-self: flex-start;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: .3s;
+        }
+
+        .book-btn:hover {
+            background: #A0E0FA;
+        }
+
+        .fa-star {
+            color: #FFB3D9; /* ✨ 顏色調整：可愛粉紅星星 */
+        }
+
+        .fa-user-group {
+            color: #A0E0FA; /* ✨ 顏色調整：可愛粉藍人數 */
+        }
+
+        .fa-dollar-sign {
+            color: #A0E0FA;
+        }
+
+        /* =========================
+           MAP (✨ 內容調整：全面奇幻插畫化)
+        ========================= */
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 700px;
+            border-radius: 40px; /* 大圓角 */
+            overflow: hidden;
+            border: 4px solid #FFF8E1; /* 奶油黃邊框 */
+        }
+
+        /* ✨ 關鍵修正：將 iframe 設為不顯示，並改用 CSS 背景顯示手繪地圖插畫 */
+        .map-container iframe {
+            display: none; 
+        }
+
+        /* 這裡使用一個手繪地圖的 CSS 占位符背景 */
+        .map-container {
+            background: #D8F3FF url('https://raw.githubusercontent.com/Shizu20211/img/refs/heads/gh-pages/chizu.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .airbnb-pin {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* ✨ 顏色調整：可愛粉藍色、超圓潤 */
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 999px;
+            padding: 15px 20px;
+            font-weight: 700;
+            box-shadow: 0 5px 20px rgba(100, 150, 200, 0.15);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            transition: .3s;
+            color: #555;
+            font-family: 'Comic Neue', cursive;
+            border: 3px solid #A0E0FA;
+        }
+
+        .airbnb-pin:hover {
+            transform: translate(-50%, -55%) scale(1.05);
+            background: #FFF8E1;
+        }
+
+        /* ✨ 這裡把 Pin 改成一隻小可愛 (類似閃亮星星魔法) */
+        .airbnb-pin::before {
+            content: '✨';
+            margin-right: 5px;
+            color: #FFB3D9;
+            font-size: 1.2rem;
+        }
+
+        .airbnb-pin i {
+            display: none; /* ✨ 隱藏原本的 location-dot */
+        }
+
+        /* =========================
+           MODAL
+        ========================= */
+        .booking-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(100, 150, 200, 0.3); /* ✨ 柔和的藍色半透明 */
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            backdrop-filter: blur(5px); /* 毛玻璃 */
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 450px;
+            border-radius: 30px; /* 大圓角 */
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(100, 150, 200, 0.1);
+            border: 3px solid #FFF8E1;
+        }
+
+        .modal-content h3 {
+            font-family: 'Bubblegum Sans', cursive;
+            margin-bottom: 1.5rem;
+            color: #555;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .modal-body {
+            line-height: 2;
+            color: #888;
+            font-weight: 700;
+        }
+
+        .modal-total {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #FFB3D9; /* ✨ 可愛粉紅總價 */
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .modal-buttons {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .modal-buttons button {
+            flex: 1;
+            border: none;
+            padding: 1rem;
+            border-radius: 15px; /* 大圓角 */
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* ✨ 顏色調整：奶油黃色取消，可愛粉藍確認 */
+        #modal-cancel-btn {
+            background: #FFF8E1;
+            color: #555;
+        }
+
+        #modal-confirm-btn {
+            background: #A0E0FA;
+            color: #555;
+        }
+
+        /* =========================
+           FILTER BTN
+        ========================= */
+        .barra-filtros {
+            margin-bottom: 1rem;
+        }
+
+        .grupo-label-fltro {
+            display: flex;
+            gap: .5rem;
+        }
+
+        .boton-filtro {
+            border: none;
+            padding: .6rem 1.2rem;
+            border-radius: 999px; /* 超圓潤 */
+            background: white;
+            cursor: pointer;
+            color: #555;
+            font-weight: 700;
+            transition: .3s;
+        }
+
+        /* ✨ 顏色與形狀調整：薰衣草紫、薄荷綠 */
+        .boton-filtro:hover { background: #FFF8E1; }
+        .green { background: #D0F7EB; }
+        .green:hover { background: #C0F9E3; }
+        .purple { background: #E9D9F8; }
+        .purple:hover { background: #E1C2F8; }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+        @media(max-width:1024px) {
+            .second-layout { display: none; }
+            .main-layout { flex-direction: column; }
+            .container-inputs { flex-direction: column; border-radius: 20px; }
+            .input-label { border-radius: 0; }
+            .elemento { min-width: 85%; }
+        }

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StayPeak 奇幻訂房島</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <!-- ✨ 引入更可愛活潑的字體 (Bubblegum Sans 和 Comic Neue) -->
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/index.css" />
+</head>
+
+<body>
+<div class="wrapper">
+        <!-- Navbar -->
+        <div class="minavbar">
+            <!-- ✨ 文字調整：更可愛的標題 -->
+            <div class="logo">Peak島</div> 
+            <div class="grupo-botones">
+                <button class="nav-btn active">探索</button>
+                <button class="nav-btn">訂房</button>
+                <button class="nav-btn">島嶼訊</button>
+                <button class="nav-btn">島主設</button>
+            </div>
+            <div class="info-usuario">
+                <div class="idiomas">Eng</div>
+                <!-- 使用一個更可愛的使用者頭像占位符 -->
+                <img class="icono-usuario" src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=100&q=80" alt="使用者" />
+            </div>
+        </div>
+
+        <!-- Main -->
+        <div class="main-layout">
+            <!-- Left -->
+            <div class="first-layout">
+                <!-- Search -->
+                <div class="suitable-options">
+                    <div class="container-fechas">
+                        <div class="fecha-filtros">
+                            <div class="botones-filtro">
+                                <button class="active">樹屋</button> <!-- ✨ 16. 內容調整：奇幻風格房型 -->
+                                <button>水晶屋</button>
+                                <button>蘑菇島</button>
+                            </div>
+                            <div class="lafecha">今天</div>
+                        </div>
+                        <div class="container-inputs">
+                            <div class="input-label">
+                                <span class="label-input">島民入住</span>
+                                <select id="search-guests" class="custom-input">
+                                    <option value="">選擇人數</option>
+                                    <option value="1">1 島民</option>
+                                    <option value="2">2 島民</option>
+                                    <option value="4">4 島民</option>
+                                    <option value="6">6 島民</option>
+                                </select>
+                            </div>
+
+                            <div class="input-label">
+                                <span class="label-input">Check In</span>
+                                <input type="date" id="search-checkin" class="custom-input" />
+                            </div>
+
+                            <div class="input-label">
+                                <span class="label-input">Check Out</span>
+                                <input type="date" id="search-checkout" class="custom-input" />
+                            </div>
+
+                            <button id="search-btn">登島！</button>
+                        </div>
+                    </div>
+
+                    <!-- Carousel Header -->
+                    <div class="header">
+                        <div class="text-suitiable">
+                            <h3>推薦島嶼選</h3> <!-- ✨ 文字調整：更可愛 -->
+                            <h6>歡迎蒞臨你的奇幻Peak島</h6>
+                        </div>
+
+                        <div class="arrows-btn">
+                            <button class="arrow" id="carousel-prev">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                            <button class="arrow" id="carousel-next">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Carousel -->
+                    <div class="carousel-wrapper">
+                        <div class="grilla-imagenes" id="image-carousel">
+                            <!-- ✨ 這裡替換為手繪/奇幻感插畫圖 (unsplash 尋找類似感插畫) -->
+                            <div class="elemento">
+                                <img src="https://pbs.twimg.com/media/EqFek9aVoAACywR?format=jpg&name=large" alt="飯店" />
+                                <div class="price">$300</div>
+                                <div class="heart"><i class="fa-regular fa-heart"></i></div>
+                                <div class="text-element">
+                                    <div class="text1">蘑菇精靈房</div>
+                                    <div class="texto-estrellado">✨ 4.8</div>
+                                </div>
+                            </div>
+                            <div class="elemento">
+                                <img src="https://pbs.twimg.com/media/Ekxt4wZXIAE-RbS?format=jpg&name=small" alt="飯店" />
+                                <div class="price">$450</div>
+                                <div class="heart"><i class="fa-regular fa-heart"></i></div>
+                                <div class="text-element">
+                                    <div class="text1">水晶發光屋</div>
+                                    <div class="texto-estrellado">✨ 4.9</div>
+                                </div>
+                            </div>
+                            <div class="elemento">
+                                <img src="https://pbs.twimg.com/media/EjPf534UcAArqYS?format=jpg&name=900x900" alt="飯店" />
+                                <div class="price">$520</div>
+                                <div class="heart"><i class="fa-regular fa-heart"></i></div>
+                                <div class="text-element">
+                                    <div class="text1">雲朵飄飄房</div>
+                                    <div class="texto-estrellado">✨ 4.7</div>
+                                </div>
+                            </div>
+                            <div class="elemento">
+                                <img src="https://pbs.twimg.com/media/G6cWs6NbwAAI_gm?format=jpg&name=large" alt="飯店" />
+                                <div class="price">$600</div>
+                                <div class="heart"><i class="fa-regular fa-heart"></i></div>
+                                <div class="text-element">
+                                    <div class="text1">魔法樹屋閣</div>
+                                    <div class="texto-estrellado">✨ 5.0</div>
+                                </div>
+                            </div>
+                            <div class="elemento">
+                                <img src="https://pbs.twimg.com/media/GwinU6saQAASun-?format=jpg&name=medium" alt="飯店" />
+                                <div class="price">$350</div>
+                                <div class="heart"><i class="fa-regular fa-heart"></i></div>
+                                <div class="text-element">
+                                    <div class="text1">果凍幻屋</div>
+                                    <div class="texto-estrellado">✨ 4.6</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Room List -->
+                <div class="building-container">
+                    <div class="barra-filtros">
+                        <div class="grupo-label-fltro">
+                            <button class="boton-filtro">島嶼選</button>
+                            <button class="boton-filtro green">超值推薦</button>
+                            <button class="boton-filtro purple">最受歡迎</button>
+                        </div>
+                    </div>
+                    <div class="grilla-filtros" id="rooms-container">
+                        <!-- 這裡將由 JavaScript RENDER 填充 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Map (✨ 全面奇幻插畫化) -->
+            <div class="second-layout">
+                <div class="map-container">
+                    <iframe src="https://maps.google.com/maps?q=Taipei&t=&z=13&ie=UTF8&iwloc=&output=embed" loading="lazy" allowfullscreen></iframe>
+                    <div class="airbnb-pin">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span id="map-target-hotel">Peak島歡迎你</span>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="booking-modal" class="booking-modal">
+        <div class="modal-content">
+            <h3>島嶼預訂明細</h3>
+            <div class="modal-body">
+                <p>預訂島嶼：<span id="modal-room-name"></span></p>
+                <p>入住日期：<span id="modal-checkin"></span></p>
+                <p>退房日期：<span id="modal-checkout"></span></p>
+                <p>住宿天數：<span id="modal-days"></span></p>
+                <p>每晚魔石：$<span id="modal-price"></span></p> <!-- ✨ 文字調整：魔石，增加奇幻感 -->
+                <hr style="margin: 15px 0; border: none; border-top: 2px dashed #FFF8E1;" /> <!-- ✨ 形狀調整：虛線 -->
+                <p class="modal-total">總價：$<span id="modal-total"></span></p>
+            </div>
+            <div class="modal-buttons">
+                <button id="modal-cancel-btn">取消登島</button>
+                <button id="modal-confirm-btn">確認預訂</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+        /* =========================
+           ROOM DATA
+        ========================= */
+        const roomsData = [
+            { id: 1, name: "蘑菇精靈房", price: 300, capacity: 2, rating: 4.8, image: "https://pbs.twimg.com/media/EqFek9aVoAACywR?format=jpg&name=large" },
+            { id: 2, name: "水晶發光屋", price: 450, capacity: 4, rating: 4.9, image: "https://pbs.twimg.com/media/Ekxt4wZXIAE-RbS?format=jpg&name=small" },
+            { id: 3, name: "雲朵飄飄房", price: 520, capacity: 6, rating: 4.7, image: "https://pbs.twimg.com/media/EjPf534UcAArqYS?format=jpg&name=900x900" },
+            { id: 4, name: "魔法樹屋閣", price: 600, capacity: 2, rating: 5.0, image: "https://pbs.twimg.com/media/G6cWs6NbwAAI_gm?format=jpg&name=large" },
+            { id: 5, name: "果凍幻屋", price: 350, capacity: 4, rating: 4.6, image: "https://pbs.twimg.com/media/GwinU6saQAASun-?format=jpg&name=medium" }
+        ];
+
+        /* =========================
+           DOM (保持原本 ID 綁定)
+        ========================= */
+        const roomsContainer = document.getElementById("rooms-container");
+        const guestSelect = document.getElementById("search-guests");
+        const checkinInput = document.getElementById("search-checkin");
+        const checkoutInput = document.getElementById("search-checkout");
+        const searchBtn = document.getElementById("search-btn");
+        const bookingModal = document.getElementById("booking-modal");
+        const modalCancelBtn = document.getElementById("modal-cancel-btn");
+        const modalConfirmBtn = document.getElementById("modal-confirm-btn");
+
+        /* =========================
+           DATE LIMIT
+        ========================= */
+        const today = new Date().toISOString().split("T")[0];
+        checkinInput.min = today;
+        checkoutInput.min = today;
+
+        /* =========================
+           RENDER ROOMS (✨ 修改圖示與樣式)
+        ========================= */
+        function renderRooms(rooms) {
+            roomsContainer.innerHTML = "";
+            if (rooms.length === 0) {
+                roomsContainer.innerHTML = "<p style='padding: 1rem; color: grey;'>沒有符合人數的島嶼房型</p>";
+                return;
+            }
+            rooms.forEach(room => {
+                const card = document.createElement("div");
+                card.className = "card-filtro";
+                card.innerHTML = `
+                    <img src="${room.image}" alt="${room.name}">
+                    <div class="room-info">
+                        <h3>${room.name}</h3>
+                        <div>
+                            <p><i class="fa-solid fa-star"></i>✨ ${room.rating}</p>
+                            <p><i class="fa-solid fa-user-group"></i>最多入住：${room.capacity} 島民</p>
+                            <p><i class="fa-solid fa-dollar-sign"></i>$${room.price}/晚</p>
+                        </div>
+                        <button class="book-btn">立即預訂</button>
+                    </div>
+                `;
+                const bookingBtn = card.querySelector(".book-btn");
+                bookingBtn.addEventListener("click", () => {
+                    openBookingModal(room.id);
+                });
+                roomsContainer.appendChild(card);
+            });
+        }
+
+        /* =========================
+           SEARCH / FILTER
+        ========================= */
+        function filterRooms() {
+            const guests = parseInt(guestSelect.value);
+            if (!guests) {
+                renderRooms(roomsData);
+                return;
+            }
+            const filtered = roomsData.filter(room => room.capacity >= guests);
+            renderRooms(filtered);
+        }
+
+        guestSelect.addEventListener("change", filterRooms);
+
+        searchBtn.addEventListener("click", () => {
+            const checkin = checkinInput.value;
+            const checkout = checkoutInput.value;
+
+            if (!checkin || !checkout) {
+                alert("請先選擇入住與退房日期，再進行預訂。");
+                return;
+            }
+            if (new Date(checkout) <= new Date(checkin)) {
+                alert("退房日期必須大於入住日期");
+                return;
+            }
+            filterRooms();
+        });
+
+        /* =========================
+           MODAL
+        ========================= */
+        function openBookingModal(roomId) {
+            const room = roomsData.find(r => r.id === roomId);
+            const checkin = checkinInput.value;
+            const checkout = checkoutInput.value;
+
+            if (!checkin || !checkout) {
+                alert("請先選擇入住與退房日期，再進行預訂。");
+                return;
+            }
+
+            const diffTime = new Date(checkout) - new Date(checkin);
+            const days = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const total = days * room.price;
+
+            document.getElementById("modal-room-name").textContent = room.name;
+            document.getElementById("modal-checkin").textContent = checkin;
+            document.getElementById("modal-checkout").textContent = checkout;
+            document.getElementById("modal-days").textContent = `${days} 天`;
+            document.getElementById("modal-price").textContent = room.price;
+            document.getElementById("modal-total").textContent = total;
+
+            /* 地圖 pin 連動 (✨ 這裡也修改了 pin 的文字) */
+            document.getElementById("map-target-hotel").textContent = `${room.name}，Peak島`;
+            bookingModal.style.display = "flex";
+        }
+
+        /* =========================
+           CLOSE MODAL
+        ========================= */
+        modalCancelBtn.addEventListener("click", () => {
+            bookingModal.style.display = "none";
+        });
+
+        modalConfirmBtn.addEventListener("click", () => {
+            bookingModal.style.display = "none";
+            alert("Booking Completed Successfully");
+        });
+
+        window.addEventListener("click", e => {
+            if (e.target === bookingModal) {
+                bookingModal.style.display = "none";
+            }
+        });
+
+        /* =========================
+           CAROUSEL
+        ========================= */
+        const carousel = document.getElementById("image-carousel");
+        const nextBtn = document.getElementById("carousel-next");
+        const prevBtn = document.getElementById("carousel-prev");
+
+        nextBtn.addEventListener("click", () => {
+            carousel.scrollBy({ left: carousel.offsetWidth / 2, behavior: "smooth" });
+        });
+        prevBtn.addEventListener("click", () => {
+            carousel.scrollBy({ left: -carousel.offsetWidth / 2, behavior: "smooth" });
+        });
+
+        /* =========================
+           INIT
+        ========================= */
+        renderRooms(roomsData);
+    </script>
+</body>
+
+</html>
