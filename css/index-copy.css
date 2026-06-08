@@ -472,8 +472,12 @@ body {
     text-align: center;
 }
 
-.room-info .fa-star,
-.stars-container .fa-star {
+.room-info .fa-star, 
+.room-info .fa-star-half-stroke,
+.room-info .fa-star-half,
+.stars-container .fa-star,
+.stars-container .fa-star-half-stroke,
+.stars-container .fa-star-half {
     color: #FFB3D9 !important;
 }
 

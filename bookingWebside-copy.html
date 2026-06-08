@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/index-copy.css" />
 </head>
-
+<!-- 未解之謎:選擇人數的時候會很奇怪的連動到右方的地圖 -->
 <body>
     <div class="wrapper">
         <div class="minavbar">
@@ -84,7 +84,7 @@
                                 <div class="heart"><i class="fa-solid fa-heart"></i></div>
                                 <div class="text-element">
                                     <div class="text1">ふわ雲の屋根裏宿</div>
-                                    <div class="texto-estrellado"><i class="fa-solid fa-star"></i> 4.8</div>
+                                    <div class="texto-estrellado"><i class="fa-solid fa-star"></i>4.8</div>
                                 </div>
                             </div>
                             <div class="elemento" data-id="2" data-name="ゆらゆら号の喫茶室" data-price="450">
@@ -103,7 +103,7 @@
                                 <div class="heart"><i class="fa-solid fa-heart"></i></div>
                                 <div class="text-element">
                                     <div class="text1">いちょう坂のおいも時間</div>
-                                    <div class="texto-estrellado"><i class="fa-solid fa-star"></i> 4.7</div>
+                                    <div class="texto-estrellado"><i class="fa-solid fa-star"></i>4.7</div>
                                 </div>
                             </div>
                             <div class="elemento" data-id="4" data-name="月夜のきのこ切り株" data-price="600">
@@ -112,7 +112,7 @@
                                 <div class="heart"><i class="fa-solid fa-heart"></i></div>
                                 <div class="text-element">
                                     <div class="text1">月夜のきのこ切り株</div>
-                                    <div class="texto-estrellado"><i class="fa-solid fa-star"></i> 5.0</div>
+                                    <div class="texto-estrellado"><i class="fa-solid fa-star"></i>5.0</div>
                                 </div>
                             </div>
                             <div class="elemento" data-id="5" data-name="Route まどろみ亭" data-price="350">
@@ -122,7 +122,7 @@
                                 <div class="heart"><i class="fa-solid fa-heart"></i></div>
                                 <div class="text-element">
                                     <div class="text1">Route まどろみ亭</div>
-                                    <div class="texto-estrellado"><i class="fa-solid fa-star"></i> 4.6</div>
+                                    <div class="texto-estrellado"><i class="fa-solid fa-star"></i>4.6</div>
                                 </div>
                             </div>
                         </div>
@@ -196,10 +196,10 @@
 
     <script>
         const roomsData = [
-            { id: 1, name: "ふわ雲の屋根裏宿", price: 300, capacity: 2, rating: 5, reviews: 84, image: "https://pbs.twimg.com/media/EqFek9aVoAACywR?format=jpg&name=large" },
+            { id: 1, name: "ふわ雲の屋根裏宿", price: 300, capacity: 2, rating: 4, reviews: 84, image: "https://pbs.twimg.com/media/EqFek9aVoAACywR?format=jpg&name=large" },
             { id: 2, name: "ゆらゆら号の喫茶室", price: 450, capacity: 4, rating: 5, reviews: 112, image: "https://pbs.twimg.com/media/Ekxt4wZXIAE-RbS?format=jpg&name=small" },
-            { id: 3, name: "いちょう坂のおいも時間", price: 520, capacity: 6, rating: 4, reviews: 56, image: "https://pbs.twimg.com/media/EjPf534UcAArqYS?format=jpg&name=900x900" },
-            { id: 4, name: "月夜のきのこ切り株", price: 600, capacity: 2, rating: 5, reviews: 240, image: "https://pbs.twimg.com/media/G6cWs6NbwAAI_gm?format=jpg&name=large" },
+            { id: 3, name: "いちょう坂のおいも時間", price: 520, capacity: 6, rating: 4.5, reviews: 56, image: "https://pbs.twimg.com/media/EjPf534UcAArqYS?format=jpg&name=900x900" },
+            { id: 4, name: "月夜のきのこ切り株", price: 600, capacity: 2, rating: 3.5, reviews: 240, image: "https://pbs.twimg.com/media/G6cWs6NbwAAI_gm?format=jpg&name=large" },
             { id: 5, name: "Route まどろみ亭", price: 350, capacity: 4, rating: 4, reviews: 39, image: "https://pbs.twimg.com/media/GwinU6saQAASun-?format=jpg&name=medium" },
             { id: 6, name: "雨音こもれび宿", price: 600, capacity: 2, rating: 5, reviews: 0, image: "https://pbs.twimg.com/media/HCezaLGaEAAQ6lB?format=jpg&name=large" }
         ];
@@ -226,25 +226,35 @@
             roomsContainer.innerHTML = ""; // 清空容器
 
             // 讓所有房間都用同一套邏輯去跑
-            rooms.forEach(room => {
+rooms.forEach(room => {
+                // ✨ 1. 精準相容 0.5 顆星的動態迴圈
                 let starsHtml = '';
-                for (let i = 0; i < room.rating; i++) starsHtml += `<i class="fa-solid fa-star"></i>`;
-                for (let i = room.rating; i < 5; i++) starsHtml += `<i class="fa-regular fa-star"></i>`;
+                for (let i = 1; i <= 5; i++) {
+                    if (room.rating >= i) {
+                        starsHtml += `<i class="fa-solid fa-star"></i>`;
+                    } else if (room.rating >= i - 0.5) {
+                        // 註：若圖示沒跑出來，可依妳的 FA 版本切換為 fa-star-half 或 fa-star-half-stroke
+                        starsHtml += `<i class="fa-solid fa-star-half-stroke"></i>`; 
+                    } else {
+                        starsHtml += `<i class="fa-regular fa-star"></i>`;
+                    }
+                }
 
+                // ✨ 2. 渲染日文卡片（完美保留妳的日文語系與 ꕤ 符號）
                 const card = document.createElement("div");
                 card.className = "card-filtro";
                 card.innerHTML = `
-            <img src="${room.image}" alt="${room.name}">
-            <div class="room-info">
-                <h3>${room.name}</h3>
-                <div class="stars-container">${starsHtml}</div>
-                <div>
-                    <p><i class="fa-solid fa-user-group"></i>お部屋の定員：${room.capacity} 名</p>
-                    <p><i class="fa-solid fa-dollar-sign"></i>ꕤ${room.price}/泊</p>
-                </div>
-                <button class="book-btn">旅の準備をする</button>
-            </div>
-        `;
+                    <img src="${room.image}" alt="${room.name}">
+                    <div class="room-info">
+                        <h3>${room.name}</h3>
+                        <div class="stars-container">${starsHtml}</div>
+                        <div>
+                            <p><i class="fa-solid fa-user-group"></i>お部屋の定員：${room.capacity} 名</p>
+                            <p><i class="fa-solid fa-dollar-sign"></i>ꕤ${room.price}/泊</p>
+                        </div>
+                        <button class="book-btn">旅の準備をする</button>
+                    </div>
+                `;
                 card.querySelector(".book-btn").addEventListener("click", () => openBookingModal(room.id));
                 roomsContainer.appendChild(card);
             });
