@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>叫號系統</title>
+    <!-- 引入原版應用的 FontAwesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/management-system.css" />
+
+</head>
+
+<body>
+
+    <div class="diner-container">
+        <header>
+            <h1><i class="fa-solid fa-burger"></i> HAPPY FAT NERD <i class="fa-solid fa-pizza-slice"></i></h1>
+            <p>ONLY FOR FAT</p>
+        </header>
+
+        <div class="control-panel">
+            <div class="input-group">
+                <input type="text" id="customerNameInput" placeholder="( 'ω'o[NEXT CUSTOMER]o" autocomplete="off">
+                <button class="btn-add" onclick="orderFood()">
+                    <i class="fas fa-hamburger"></i> 點餐入座
+                </button>
+            </div>
+            <div class="action-buttons">
+                <button class="btn-next" onclick="cookNextOrder()">
+                    <i class="fas fa-fire-burner"></i> 製作下一份
+                </button>
+                <button class="btn-finish" onclick="serveOrder()">
+                    <i class="fas fa-concierge-bell"></i> 美味出餐
+                </button>
+            </div>
+        </div>
+
+        <div class="marquee-stats" id="dinerStats">
+            今日總接單: 0 份 | 吃飽喝足(*´༥`*): 0 人 | 好餓好餓(๑･﹃ ･๑): 0 人
+        </div>
+
+        <div class="kitchen-station">
+            <div class="chef-delivery">
+                <div class="burger-icon-box" id="kitchenIcon">
+                    <i class="fas fa-store-slash" style="color: #aaa;"></i>
+                </div>
+                <div class="order-details">
+                    <h3 id="currentCustomerName"><i class="fa-solid fa-kitchen-set"></i>大廚準備中</h3>
+                    <p id="currentOrderInfo">單號: -- | 點餐時間: --</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="diner-grid">
+            <div class="board-box">
+                <h2><i class="fas fa-clock" style="color:var(--diner-yellow)"></i> 飢餓等待中(›´ω`‹ )</h2>
+                <ul class="ticket-list" id="hungryQueueContainer">
+                </ul>
+            </div>
+
+            <div class="board-box">
+                <h2><i class="fa-solid fa-utensils" style="color:var(--mint-green)"></i> 美味已出餐( ˶ᵔ⤙ᵔ˵ )</h2>
+                <ul class="ticket-list" id="servedHistoryContainer">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 漢堡店核心資料狀態
+        let orderCounter = 1;       // 點餐單號計數器 (001, 002...)
+        let totalOrders = 0;        // 今日總訂單數
+        let cookingCustomer = null; // 目前正在製作的訂單（限制一筆）
+        let hungryQueue = [];       // 等待製作的佇列
+        let servedList = [];        // 已出餐的清單
+
+        // 1. 點餐入座邏輯 (登記)
+        function orderFood() {
+            const nameInput = document.getElementById('customerNameInput');
+            const name = nameInput.value.trim();
+
+            if (!name) {
+                alert('請告訴店員您的暱稱以利稱呼唷！');
+                return;
+            }
+
+            const orderId = String(orderCounter++).padStart(3, '0');
+
+            // 紀錄點餐精確時間
+            const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+            // 包裝成訂單物件
+            const newOrder = {
+                id: orderId,
+                name: name,
+                time: timestamp
+            };
+
+            hungryQueue.push(newOrder);
+            totalOrders++;
+
+            nameInput.value = '';
+            updateDinerUI();
+        }
+
+        //廚房判斷：製作下一份
+        function cookNextOrder() {
+            // 限制只能同時製作一份
+            if (cookingCustomer !== null) {
+                alert('鐵板上還有漢堡在煎！請先將當前漢堡「美味出餐」！');
+                return;
+            }
+
+            if (hungryQueue.length === 0) {
+                alert('目前沒有新訂單，主廚可以休息一下！');
+                return;
+            }
+
+            // 先進先出：從佇列前方移出 (shift)
+            cookingCustomer = hungryQueue.shift();
+            updateDinerUI();
+        }
+
+        // 3. 廚房判斷：美味出餐 (Finish)
+        function serveOrder() {
+            if (cookingCustomer === null) {
+                alert('目前廚房沒有正在製作的餐點。');
+                return;
+            }
+
+            // 移入完成清單
+            servedList.push(cookingCustomer);
+
+            // 釋放廚房名額
+            cookingCustomer = null;
+            updateDinerUI();
+        }
+
+        //漢堡店看板渲染核心
+        function updateDinerUI() {
+            // 更新頂部跑馬燈統計數據
+            document.getElementById('dinerStats').innerText =
+                `今日總接單: ${totalOrders} 份 | 滿足飽腹: ${servedList.length} 人 | 嗷嗷待哺: ${hungryQueue.length} 人`;
+
+            // 更新中央廚房區狀態
+            const kitchenIcon = document.getElementById('kitchenIcon');
+            const currentCustomerName = document.getElementById('currentCustomerName');
+            const currentOrderInfo = document.getElementById('currentOrderInfo');
+
+            if (cookingCustomer) {
+                kitchenIcon.innerHTML = `<i class="fas fa-fire-burner"></i>`;
+                kitchenIcon.style.color = "var(--diner-red)";
+                currentCustomerName.innerText = `正在為 ${cookingCustomer.name} 瘋狂美味製作中`;
+                currentOrderInfo.innerText = `單號: # ${cookingCustomer.id} | 點餐時間: ${cookingCustomer.time}`;
+            } else {
+                kitchenIcon.innerHTML = `<i class="fas fa-store-slash"></i>`;
+                kitchenIcon.style.color = "#aaa";
+                currentCustomerName.innerText = '目前廚房休息中';
+                currentOrderInfo.innerText = '單號: -- | 點餐時間: --';
+            }
+
+            // 更新等候佇列
+            const hungryContainer = document.getElementById('hungryQueueContainer');
+            hungryContainer.innerHTML = '';
+
+            hungryQueue.forEach((customer, index) => {
+                const li = document.createElement('li');
+
+                if (index === 0) {
+                    li.className = 'next-customer';
+                    li.innerHTML = `
+                    <div>
+                        <span class="order-num">${customer.id}</span>
+                        <span>${customer.name}</span>
+                        <span class="next-badge">下一位入座</span>
+                    </div>
+                    <span class="time-stamp">${customer.time}</span>
+                `;
+                } else {
+                    li.innerHTML = `
+                    <div>
+                        <span class="order-num" style="background: #666;">${customer.id}</span>
+                        <span>${customer.name}</span>
+                    </div>
+                    <span class="time-stamp">${customer.time}</span>
+                `;
+                }
+                hungryContainer.appendChild(li);
+            });
+
+            // 更新出餐歷史紀錄
+            const servedContainer = document.getElementById('servedHistoryContainer');
+            servedContainer.innerHTML = '';
+
+            // 倒序讓最新出餐的在最上面
+            [...servedList].reverse().forEach(customer => {
+                const li = document.createElement('li');
+                li.style.opacity = '0.7';
+                li.innerHTML = `
+                <div>
+                    <span class="order-num" style="background:var(--mint-green);">${customer.id}</span>
+                    <span style="text-decoration: line-through; color: #888;">${customer.name}</span>
+                </div>
+                <span class="time-stamp" style="color:var(--mint-green);"><i class="fas fa-check-double"></i> ENJOY!</span>
+            `;
+                servedContainer.appendChild(li);
+            });
+        }
+
+        // Enter 鍵直接點餐
+        document.getElementById('customerNameInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                orderFood();
+            }
+        });
+    </script>
+
+</body>
+
+</html>

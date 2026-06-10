@@ -16,9 +16,9 @@
             margin: auto;
             /* ✨ 2. 形狀圓潤化：超大圓角，增加夢幻感 */
             background: #FFFFFF;
-            border-radius: 40px;
+            border-radius: 30px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(100, 150, 200, 0.1);
+            box-shadow: 0 10px 30px rgba(57, 116, 175, 0.1);
         }
 
         /* =========================

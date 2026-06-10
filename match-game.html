@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/match-game.css" />
+
+</head>
+
+<body>
+    <div class="game-wrapper">
+        <header class="game-header">
+            <h1>記憶配對</h1>
+            <!-- 即時數據追蹤區域 -->
+            <div class="scoreboard">
+                <div class="stat-box">翻牌次數：<span id="moves">0</span></div>
+                <div class="stat-box">已配對數：<span id="matches">0</span> / 8</div>
+            </div>
+            <button id="restart-btn" class="btn">重新開始</button>
+        </header>
+
+        <!-- 16張卡牌的舞台 -->
+        <main id="game-board" class="game-board"></main>
+    </div>
+    <script>
+        const ANIMALS = [
+            'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhhVKGnJ3sQpXTU58VrDAvYJHhjZUVMGcs6hq395JwDzXOuuAfwcMczI5n-N0y9HlhfA-lIWsfgDoblEXYkEFfkFb5VGKl6iE3oUiVMzNj9wIp8n56BHeqtQmvTFB6I-cComKVyGkEjV3BZ/s800/pet_cat_hakai.png',
+            'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhG4xpQ_FMBOIdN_junRODMG3TxJw1q5hSm_OVtAJkeI_qS2JBSQbHltv1SE46v-zagGxHe6aKvzbkziOE7LeInDS7UIIhwUfcCBYnmFhJe6dNjM4Jribry1PoJagMXmVhOsR7ESGt-0l9G/s800/dog_akitainu.png',
+            'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2_gRBfclZPcJTvslMrXALglQ1tgYi5ZUqaIJsJoDgl3lq3VBXwphjTJU5tvmDcwp590Kd2k1EJGftR10cg-9NYengwKl_zsyz6L_4d-BAFk_R8wS3H2X-N8vhASg6lASVAR5owGFYaP4/s1600/easter_bunny.png',
+            'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGFRYWGx_U_5esluXF0CqsFovDmLAl2z0lxEPnP8wsNrbAqVcIjlJiG9tsUkh_0GEB1f1r4OyWh58xFlZili3-GRjcoD-5KFj8PQymvHTGZ14j1Wr0yf194sjqorZSy9EnAP0Uo_ILxdE/s800/animal_yopparai_kuma.png',
+            'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjL1gj0pasFcSnxtyySGmlbVrpAf8cTrlaudZ0hrB0azpSOc-CBBhuEPAmfm0bwyW33CP_D8cv041s5QkpcDZi8h-yda5zCqKCvWsAweHNSCYz3hQsTghkTa7Lt7Jj4XSqSjE8z3hWvwryA/s1600/animal_happa_kitsune.png',
+            'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi04kMgnGgv2znuGqJ2cUtl6kIc0DcbBh3lHoQpld9FsQniaSc_33Kwt2ujpQVNIbCdsR50v-PfmodG407tYupwU97hRil-TJKcadqbgoaPEdAgi1VhTfw5Mcz8_uQF9DAftq-FOL6KIDaV/s656/animal_marmot_mike.png',
+            'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-VN04GSpkFtzjlqfPo8CPTUpXoAnd-oeGzlO5C51x47F93onLopslgc_x3wd8kPXQM0JFVkpOfaZllVogRLGfvwbz0VScuvFkQe9RI_nIii8UQr9qKLqZ4UbRDj2SIU6jBJRNSg_GemxtSvaLTfn956Ksrw6mZT8yzr-2t7D88ze1poskJE_WiLRUXxUS/s745/animal_melt5_penguin.png',
+            'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi92krrqxkuU0x5TN2vvLI3docfUJbLWcQnuo0lKVoxeNDpEgFcWP2IbpZnTYFShdMpMHV-mhyphenhyphenKdOmA3lD41_IGC_5SLyKr6EHTr3zi2AocJyAEagJ4Q4AR43SpDbEYTOkpfPGuqxw3Qko/s800/bird_shimaenaga.png '
+        ];
+        let cardData = [...ANIMALS, ...ANIMALS];
+
+        // 遊戲狀態變數
+        let moves = 0;
+        let matchCount = 0;
+        let flippedCards = [];
+        let isLocked = false; //防止非法連續點擊
+
+        // DOM 元素選取
+        const board = document.getElementById('game-board');
+        const movesDisplay = document.getElementById('moves');
+        const matchesDisplay = document.getElementById('matches');
+        const restartBtn = document.getElementById('restart-btn');
+
+        // 隨機洗牌機制
+        function shuffle() {
+            // 使用 Fisher-Yates 洗牌演算法，比 Math.random() 更均勻隨機
+            for (let i = cardData.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [cardData[i], cardData[j]] = [cardData[j], cardData[i]];
+            }
+        }
+        // 初始化遊戲
+        function initGame() {
+            moves = 0;
+            matchCount = 0;
+            flippedCards = [];
+            isLocked = false;
+
+            movesDisplay.textContent = moves;
+            matchesDisplay.textContent = matchCount;
+            board.innerHTML = '';
+
+            shuffle();
+
+            cardData.forEach((animal, index) => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.dataset.animal = animal;
+                card.dataset.index = index;
+
+                card.innerHTML = `
+      <div class="card-face card-back">꒰( ˙𐃷˙ )꒱</div>
+      <div class="card-face card-front">
+        <img src="${animal}" alt="${animal}" class="animal-img">
+      </div>
+    `;
+
+                card.addEventListener('click', handleCardClick);
+                board.appendChild(card);
+            });
+        }
+
+
+        //卡片點擊事件（內建防錯與鎖定功能）
+        function handleCardClick() {
+            if (isLocked) return;
+            if (this.classList.contains('flipped') || this.classList.contains('matched')) return;
+            if (flippedCards.length === 1 && flippedCards[0] === this) return;
+
+            this.classList.add('flipped');
+            flippedCards.push(this);
+
+            if (flippedCards.length === 2) {
+                moves++;
+                movesDisplay.textContent = moves;
+                isLocked = true;
+                checkMatch();
+            }
+        }
+
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+            //比對 dataset.animal
+            const isMatch = card1.dataset.animal === card2.dataset.animal;
+
+            if (isMatch) {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+
+                matchCount++;
+                matchesDisplay.textContent = matchCount;
+                flippedCards = [];
+                isLocked = false;
+
+                if (matchCount === ANIMALS.length) {
+                    setTimeout(() => alert(`恭喜通關！總共花了 ${moves} 次嘗試。`), 500);
+                }
+            } else {
+                setTimeout(() => {
+                    card1.classList.remove('flipped');
+                    card2.classList.remove('flipped');
+                    flippedCards = [];
+                    isLocked = false;
+                }, 1000);
+            }
+        }
+
+        // 監聽重新開始按鈕
+        restartBtn.addEventListener('click', initGame);
+
+        // 網頁載入完成後自動開局
+        window.addEventListener('DOMContentLoaded', initGame);
+    </script>
+</body>
+
+</html>

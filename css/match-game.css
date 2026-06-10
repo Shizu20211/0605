@@ -1,0 +1,137 @@
+:root {
+  --bg-color: #f4f7f6;
+  --primary-color: #4ecdc4;
+  --card-back: #ebc4bd;
+  --card-front: #ffffff;
+  --success-color: #ff6b6b;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.game-wrapper {
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  padding: 20px;
+}
+
+.scoreboard {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.stat-box {
+  background: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+/* 3D 舞台 */
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4行4列 */
+  gap: 12px;
+  perspective: 1000px;                  /* 賦予 3D 透視感 */
+  margin-top: 20px;
+}
+
+/* 卡片主體 */
+.card {
+  aspect-ratio: 1;                     /* 確保卡片是正方形 */
+  position: relative;
+  transform-style: preserve-3d;        /* 讓子元素維持 3D 空間 */
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+/* 翻轉狀態 */
+.card.flipped {
+  transform: rotateY(180deg);
+}
+
+/* 成功配對狀態 */
+.card.matched {
+  /* 1. 保持旋轉 180 度：「固定留在動物正面」 */
+  transform: rotateY(180deg) scale(0.98); /* scale(0.92) 達成了些微縮小的效果 */
+  /* 滑鼠游標變回預設，並禁止再度點擊 */
+  cursor: default; 
+  pointer-events: none; 
+}
+
+
+.card.matched .card-front {
+  background-color: #c8d5d5;     
+  transition: background-color 0.8s, border 0.8s;
+}
+
+.card.matched .animal-img {
+  opacity: 0.6;                
+  filter: grayscale(30%);        
+}
+
+/* 正反面共用 */
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;         /* 背面朝向觀眾時隱藏 */
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* 卡牌背面（蓋牌） */
+.card-back {
+  background-color: var(--card-back);
+  color: white;
+}
+
+/* 卡牌正面（翻開） */
+.card-front {
+  background-color: var(--card-front);
+  transform: rotateY(180deg);          /* 預先轉 180 度隱藏起來 */
+}
+
+/* 針對卡片正面的圖片進行現代化縮放優化 */
+.animal-img {
+  width: 85%;         
+  height: 85%;        
+  object-fit: contain; /* 保持圖片原本的比例縮放*/
+  pointer-events: none;/* 確保點擊都能作用在卡片上 */
+}
+
+.card-back {
+  background-color: var(--card-back);
+  color: white;
+  font-size: 1.5rem;  
+}

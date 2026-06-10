@@ -1,0 +1,273 @@
+:root {
+            --diner-red: #d62828;
+            --diner-yellow: #f77f00;
+            --cream-white: #fdf0d5;
+            --dark-navy: #003049;
+            --mint-green: #669bbc;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', 'Bungee', sans-serif;
+            margin: 0;
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            
+            /* Checkerboard Grid 棋盤格背景 */
+            background-color: #e5e5e5;
+            background-image: 
+                linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 75%, #f0f0f0 75%, #f0f0f0),
+                linear-gradient(45deg, #f0f0f0 25%, #ffffff 25%, #ffffff 75%, #f0f0f0 75%, #f0f0f0);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+        }
+
+        .diner-container {
+            width: 100%;
+            max-width: 850px;
+            background: var(--cream-white);
+            border: 6px solid var(--dark-navy);
+            border-radius: 24px;
+            box-shadow: 12px 12px 0px var(--dark-navy);
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header {
+            text-align: center;
+            background-color: var(--diner-red);
+            border: 4px solid var(--dark-navy);
+            padding: 20px;
+            border-radius: 16px;
+            color: var(--cream-white);
+            box-shadow: 0 6px 0px var(--dark-navy);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-family: 'Bungee', 'Noto Sans TC', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            text-shadow: 4px 4px 0px var(--dark-navy);
+        }
+
+        header p {
+            margin: 5px 0 0 0;
+            font-size: 1.1rem;
+            color: var(--diner-yellow);
+            font-weight: bold;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        /* 控制面板 (點餐與出餐操控) */
+        .control-panel {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 20px;
+            background: #fff;
+            border: 4px solid var(--dark-navy);
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            box-shadow: 4px 4px 0px var(--dark-navy);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 15px;
+            border: 3px solid var(--dark-navy);
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            outline: none;
+            background-color: #fff;
+        }
+
+        input[type="text"]:focus {
+            background-color: #fffdf6;
+            border-color: var(--diner-red);
+        }
+
+        button {
+            padding: 12px 25px;
+            border: 3px solid var(--dark-navy);
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 900;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.1s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 4px 4px 0px var(--dark-navy);
+        }
+
+        button:active {
+            transform: translate(3px, 3px);
+            box-shadow: 1px 1px 0px var(--dark-navy);
+        }
+
+        .btn-add { background-color: var(--diner-yellow); color: white; }
+        .btn-next { background-color: var(--mint-green); color: white; }
+        .btn-finish { background-color: var(--diner-red); color: white; }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* 告示牌數據 */
+        .marquee-stats {
+            background-color: var(--dark-navy);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border: 2px dashed var(--diner-yellow);
+        }
+
+        /* 核心：出餐廚房區（原目前看診） */
+        .kitchen-station {
+            background: #fff;
+            border: 4px solid var(--dark-navy);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 6px 6px 0px var(--dark-navy);
+            position: relative;
+        }
+
+        .kitchen-station::before {
+            content: 'NOW COOKING';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--diner-red);
+            color: white;
+            padding: 4px 12px;
+            font-family: 'Bungee', sans-serif;
+            border: 3px solid var(--dark-navy);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .chef-delivery {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-top: 10px;
+        }
+
+        .burger-icon-box {
+            font-size: 3rem;
+            color: var(--diner-yellow);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .order-details h3 {
+            margin: 0;
+            font-size: 2rem;
+            color: var(--diner-red);
+        }
+
+        .order-details p {
+            margin: 8px 0 0 0;
+            font-size: 1.1rem;
+            color: #555;
+            font-weight: bold;
+        }
+
+        /* 看診清單與歷史紀錄 Grid 佈局 */
+        .diner-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .board-box {
+            background: #fff;
+            border: 4px solid var(--dark-navy);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 5px 5px 0px var(--dark-navy);
+            min-height: 300px;
+        }
+
+        .board-box h2 {
+            margin: 0 0 20px 0;
+            font-size: 1.3rem;
+            color: var(--dark-navy);
+            border-bottom: 4px dashed var(--mint-green);
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ticket-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .ticket-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid var(--dark-navy);
+            border-radius: 10px;
+            margin-bottom: 12px;
+            background-color: var(--cream-white);
+            box-shadow: 2px 2px 0px var(--dark-navy);
+            font-weight: bold;
+        }
+
+        .ticket-list .order-num {
+            background: var(--dark-navy);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-family: 'Bungee', sans-serif;
+        }
+
+        .ticket-list li.next-customer {
+            background-color: #ffeecc;
+            border: 3px solid var(--diner-red);
+            position: relative;
+        }
+
+        .next-badge {
+            background: var(--diner-red);
+            color: white;
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+        }
+
+        .time-stamp {
+            font-size: 0.85rem;
+            color: #777;
+        }
